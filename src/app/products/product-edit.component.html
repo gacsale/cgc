@@ -1,0 +1,33 @@
+<mat-card class="col-md-12">
+  <mat-card-header class="col-md-12">
+      <mat-card-title>{{ productId > 0 ? 'Editar Producto' : 'Crear Producto' }}</mat-card-title>
+  </mat-card-header>
+
+  <form [formGroup]="formProduct">
+    <mat-form-field class="col-md-6">
+        <input matInput placeholder="ID" [value]="productId" disabled>
+    </mat-form-field>
+    <mat-form-field class="col-md-6">
+        <input matInput placeholder="Nombre" formControlName="productDesc" required>
+    </mat-form-field>
+    <mat-form-field class="col-md-6">
+        <input matInput placeholder="Precio" formControlName="price" required>
+    </mat-form-field>
+    <mat-form-field class="col-md-6">
+        <mat-label>Seleccione el estado</mat-label>
+        <mat-select formControlName="statusId" required>
+            <mat-option *ngFor="let option of optionsStatus" [value]="option.id">
+                {{option.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div class="col-md-12 text-center">
+      <div class="ml-auto button-row">
+          <button mat-raised-button color="primary" (click)="upsert()" [disabled]="!formProduct.valid" type="submit">Guardar</button>
+          <button (click)="close()" mat-raised-button color="warn">Cancelar</button>
+      </div>
+  </div>
+  </form>
+
+</mat-card>
